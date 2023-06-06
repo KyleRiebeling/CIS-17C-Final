@@ -17,23 +17,26 @@ void selection(int arr[], int size, int stop) {
       return;
    }
 
-   int max = arr[0];
    int maxIndx = 0;
+   int minIndx = 0;
 
-   for (int i = 0; i < size; i++) {
-      if (arr[i] > max) {
-         max = arr[i];
+   for (int i = stop; i < size; i++) {
+      if (arr[i] > arr[maxIndx]) {
          maxIndx = i;
+      } else if (arr[i] < arr[minIndx]) {
+         minIndx = i;
       }
    }
-
+   //Swap max
    int tmp = arr[size - 1];
-   arr[size - 1] = max;
+   arr[size - 1] = arr[maxIndx];
    arr[maxIndx] = tmp;
+   //Swap min
+   tmp = arr[stop];
+   arr[stop] = arr[minIndx];
+   arr[minIndx] = tmp;
 
-   stop++;
-   selection(arr, size - 1, stop);
-
+   selection(arr, size - 1, stop + 1);
 }
 
 int main(int argc, char** argv) {
@@ -77,7 +80,11 @@ int main(int argc, char** argv) {
    cout << "Selection took " << duration.count() << " microseconds with " << oper << " operations" << endl;
 
    for (int i = 0; i < AMOUNT; i++) {
-      if (i > (AMOUNT - 1050)) {
+      if (i < 1020) {
+         cout << copy[i] << " ";
+         if (i % 10 == 0)cout << endl;
+      }
+      if (i > (AMOUNT - 1020)) {
          cout << copy[i] << " ";
          if (i % 10 == 0)cout << endl;
       }
