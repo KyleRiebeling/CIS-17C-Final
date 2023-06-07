@@ -17,8 +17,8 @@ void selection(int arr[], int size, int stop) {
       return;
    }
 
-   int maxIndx = 0;
-   int minIndx = 0;
+   int maxIndx = stop;
+   int minIndx = stop;
 
    for (int i = stop; i < size; i++) {
       if (arr[i] > arr[maxIndx]) {
@@ -27,16 +27,21 @@ void selection(int arr[], int size, int stop) {
          minIndx = i;
       }
    }
+   size--;
    //Swap max
-   int tmp = arr[size - 1];
-   arr[size - 1] = arr[maxIndx];
-   arr[maxIndx] = tmp;
+   if (maxIndx != size) {
+      int tmp = arr[size];
+      arr[size] = arr[maxIndx];
+      arr[maxIndx] = tmp;
+   }
    //Swap min
-   tmp = arr[stop];
-   arr[stop] = arr[minIndx];
-   arr[minIndx] = tmp;
+   if (minIndx != stop) {
+      int tmp = arr[stop];
+      arr[stop] = arr[minIndx];
+      arr[minIndx] = tmp;
+   }
 
-   selection(arr, size - 1, stop + 1);
+   selection(arr, size, stop + 1);
 }
 
 int main(int argc, char** argv) {
