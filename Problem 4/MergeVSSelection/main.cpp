@@ -12,43 +12,40 @@
 using namespace std;
 using namespace std::chrono;
 
+long long oper = 0;
+
 void selection(int *arr, int size, int stop) {
-   if (stop == 10000) {
-      return;
-   }
-
-   int maxIndx = stop;
-   int minIndx = stop;
-
-   for (int i = stop; i < size; i++) {
-      if (arr[i] > arr[maxIndx]) {
-         maxIndx = i;
-      } else if (arr[i] < arr[minIndx]) {
-         minIndx = i;
+   //Loop and declare variables
+   int indx, min;
+   oper++; //i = 0
+   for (int pos = 0; pos < stop; pos++) {
+      oper+=2; //pos<n, pos++
+      //Find the smallest in the list, swap after finding
+      oper+= 3; // =, =, a[i]
+      min = arr[pos];
+      indx = pos;
+      oper++; //i = 0;
+      for (int i = pos + 1; i < size; i++) {
+         oper+=2; //i<2,i++
+         oper+=2; //a[i], <
+         if (arr[i] < min) {
+            oper+=3; // a[i], = , =
+            min = arr[i];
+            indx = i;
+         }
       }
+      //Perform the swap
+      oper+=5; //a[i]x3, =x2
+      arr[indx] = arr[pos];
+      arr[pos] = min;
    }
-   size--;
-   //Swap max
-   if (maxIndx != size) {
-      int tmp = arr[size];
-      arr[size] = arr[maxIndx];
-      arr[maxIndx] = tmp;
-   }
-   //Swap min
-   if (minIndx != stop) {
-      int tmp = arr[stop];
-      arr[stop] = arr[minIndx];
-      arr[minIndx] = tmp;
-   }
-
-   selection(arr, size, stop + 1);
 }
 
 int main(int argc, char** argv) {
    srand(time(0));
    const int AMOUNT = 100000;
+   const int SORT_AMOUNT = 1000;
 
-   long long oper = 0;
    int *array = new int[AMOUNT];
    int *copy = new int[AMOUNT];
 
@@ -77,22 +74,18 @@ int main(int argc, char** argv) {
    start = high_resolution_clock::now();
 
    //Do Selection
-   selection(copy, AMOUNT, 0);
+   selection(copy, AMOUNT, SORT_AMOUNT);
 
    stop = high_resolution_clock::now();
    duration = duration_cast<microseconds>(stop - start);
 
    cout << "Selection took " << duration.count() << " microseconds with " << oper << " operations" << endl;
 
-   for (int i = 0; i < AMOUNT; i++) {
-      //if (i < 1020) {
-         //cout << copy[i] << " ";
-         //if (i % 10 == 0)cout << endl;
-      //}
-      //if (i > (AMOUNT - 1020)) {
-         cout << copy[i] << " ";
+   for (int i = 1; i <= AMOUNT; i++) {
+      if (i < SORT_AMOUNT + 50) {
+         cout << copy[i-1] << " ";
          if (i % 10 == 0)cout << endl;
-      //}
+      }
    }
    cout << endl;
 
