@@ -12,8 +12,8 @@
 using namespace std;
 using namespace std::chrono;
 
-void selection(int arr[], int size, int stop) {
-   if (stop == 1000) {
+void selection(int *arr, int size, int stop) {
+   if (stop == 10000) {
       return;
    }
 
@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
    const int AMOUNT = 100000;
 
    long long oper = 0;
-   int array[AMOUNT];
-   int copy[AMOUNT];
+   int *array = new int[AMOUNT];
+   int *copy = new int[AMOUNT];
 
    for (int i = 0; i < AMOUNT; i++) {
       array[i] = rand() % 1000;
@@ -85,14 +85,14 @@ int main(int argc, char** argv) {
    cout << "Selection took " << duration.count() << " microseconds with " << oper << " operations" << endl;
 
    for (int i = 0; i < AMOUNT; i++) {
-      if (i < 1020) {
+      //if (i < 1020) {
+         //cout << copy[i] << " ";
+         //if (i % 10 == 0)cout << endl;
+      //}
+      //if (i > (AMOUNT - 1020)) {
          cout << copy[i] << " ";
          if (i % 10 == 0)cout << endl;
-      }
-      if (i > (AMOUNT - 1020)) {
-         cout << copy[i] << " ";
-         if (i % 10 == 0)cout << endl;
-      }
+      //}
    }
    cout << endl;
 
