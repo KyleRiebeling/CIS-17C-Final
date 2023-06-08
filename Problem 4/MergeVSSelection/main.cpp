@@ -44,7 +44,7 @@ void selection(int *arr, int size, int stop) {
 int main(int argc, char** argv) {
    srand(time(0));
    const int AMOUNT = 100000;
-   const int SORT_AMOUNT = 1000;
+   const int SORT_AMOUNT = 100000;
 
    int *array = new int[AMOUNT];
    int *copy = new int[AMOUNT];
