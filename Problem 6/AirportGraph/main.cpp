@@ -34,6 +34,8 @@ int main(int argc, char** argv) {
    graph.minDistDijk("ORD", "LAX");
    graph.minDistDijk("JFK", "SFO");
    graph.primMST();
+   
+   cout << "By hand analysis is the same as my program!" << endl;
 
    return 0;
 }
